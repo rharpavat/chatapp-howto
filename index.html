@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>How to ChatApp?</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<h1>ChatApp</h1>
+						<h3>
+							A Guide To Survival
+						</h3>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">Introduction</a></li>
+							<li><a href="#project-setup">Project Setup</a></li>
+							<li><a href="#main-mvc">Main MVC</a></li>
+							<li><a href="#mini-mvc">Mini-MVCs</a></li>
+							<li><a href="#connecting-mvcs">Connecting MVCs</a></li>
+							<li><a href="#next-steps">Next Steps</a></li>
+							<li><a href="#faq">FAQ</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>The Single Most Important Thing You Can Do</h2>
+										</header>
+										<p>is to begin your implementation immediately. <br/>
+										<i>
+											The earlier you begin your implementation, the greater chances you have of
+											actually finishing the project.
+										</i></p>
+									</div>
+								</div>
+							</section>
+
+						<!-- First Section -->
+						<section id="project-setup" class="main">
+							<header class="major">
+								<h2>Begin With The Basics</h2>
+								<h3>Set up your project + package hierarchy</h3>
+							</header>
+							<ol>
+								<li>
+									Create a new Java Project named HW08 & connect it to your team lead's SVN repository.
+								</li>
+								<li>
+									Set the <i>svn:externals</i> property of the project's <b>src</b> folder to the value: <br/>
+										<b>provided https://svn.rice.edu/r/comp310-svn/course/ChatApp/provided_F18</b>
+								</li>
+								<li>
+									Commit the changes to SVN. Update the repository to HEAD. You should now have the
+									<b>provided</b> package in your project, under the <b>src</b> package.
+								</li>
+								<li>
+									Create a new package under <b>src</b>, named <b>netid1_netid2</b>, where netid1 is
+									the netID of the team lead. <b>ALL YOUR CHATAPP IMPLEMENTATION CODE WILL GO
+									IN HERE</b>.
+								</li>
+								<li>
+									Add the following lines to your <i>module-info.java</i> file:
+									<ul>
+										<li>
+											requires java.desktop;
+										</li>
+										<li>
+											requires java.rmi;
+										</li>
+										<li>
+											requires org.junit.jupiter.api;
+										</li>
+									</ul>
+								</li>
+							</ol>
+						</section>
+
+						<section id="main-mvc" class="main">
+							<header class="major">
+								<h2>Set up the main MVC</h2>
+							</header>
+							<ol>
+								<li>
+									Create packages for the main model, view, and controller. Create the actual
+									Controller and Model classes. Create a model-to-view
+									adapter in the model package, and a view-to-model adapter in the view package.
+								</li>
+								<li>
+									Create the JFrame View class. Your ChatApp view should have at components for
+									at least the following capabilities:
+									<br/>
+									<br/>
+									<ul>
+										<li>
+											Entering a user's IP address and connecting to them.
+										</li>
+										<li>
+											Creating a new chatroom (optionally taking in a name for it).
+										</li>
+										<li>
+											Seeing the users you're connected to.
+										</li>
+										<li>
+											Seeing a list of the chatrooms you're connected to.
+										</li>
+										<li>
+											<i>If you're supporting invites to chatrooms</i>, a way to invite a selected
+											user to a chatroom.
+										</li>
+										<li>
+											<i>If you're supporting request-to-join for chatrooms</i>, a way to see
+											what chatrooms are available on the network, and to join one.
+										</li>
+										<li>
+											<i>If you're supporting request-to-join for chatrooms</i>, a way to search
+											for all chatrooms you can see on the network.
+										</li>
+										<li>
+											A panel (I'd recommend a tabbed pane) into which chatrooms can be installed
+											as needed.
+										</li>
+										<li>
+											A button to quit the application. <b>ALWAYS USE THIS WHEN EXITING YOUR CHATAPP.</b>
+										</li>
+									</ul>
+								</li>
+								<li>
+									Create any methods you need in your adapters (at a minimum, the ability to send the
+									<b>quit</b> instruction to the model) and connect them through the Controller.
+								</li>
+								<li>
+									Test any methods you've created so far and ensure they work.
+								</li>
+							</ol>
+							<hr />
+							<b>Here's an example of what my sample GUI looks like: </b>
+							<br />
+							<br />
+							<img src="images/mainview.png" / style="height: 100%; width: 100%">
+						</section>
+
+						<section id="mini-mvc" class="main">
+							<header class="major">
+								<h2>Set up the mini-MVC</h2>
+							</header>
+							<ol>
+								<li>
+									Create a separate package somewhere in your project under the <b>src</b> package
+									that will contain the components for a chatroom mini-MVC. Create controller,
+									model, and view sub-packages. Create the Controller and Model classes as well
+									as the view-to-model and model-to-view adapters. <br/>
+									<i>Note that the mini-controller should not have a main method! It should
+									only be able to be instantiated by the main MVC.</i>
+								</li>
+								<li>
+									Create the View class. I would recommend creating this as a <i>JPanel</i> instead
+									of a <i>JFrame</i>, since it will never exist on its own, only be installed into
+									the main MVC's view. Your chatroom view might have components for the following
+									capabilities:
+									<br />
+									<br />
+									<ul>
+										<li>
+											Leaving a chatroom.
+										</li>
+										<li>
+											Sending a text message.
+										</li>
+										<li>
+											Displaying all the text messages that have been sent in the room so far.
+										</li>
+										<li>
+											You may also want to add a console panel, or a button that sends an
+											unknown-type message.
+										</li>
+									</ul>
+								</li>
+								<li>
+									Create any methods you need in your adapters (at a minimum, the ability to send the
+									<b>leave chatroom</b> instruction to the mini-model) and connect them through the
+									mini-controller.
+								</li>
+							</ol>
+							<hr />
+							<b>Here's an example of what my sample GUI looks like: </b>
+							<br />
+							<br />
+							<img src="images/miniview.png" / style="height: 100%; width: 100%">
+						</section>
+
+						<section id="connecting-mvcs" class="main">
+							<header class="major">
+								<h2>Connecting the main- and mini-MVCs</h2>
+							</header>
+							<ol>
+								<li>
+									Create adapters for the main model to the mini-controller and the
+									mini-controller to the main model.
+								</li>
+								<li>
+									Create a method in the main-model-to-view adapter to create a new chatroom.
+								</li>
+								<li>
+									In the main controller, intercept this method call - instead of sending it
+									to the view, do the following:
+									<br />
+									<br />
+									<ul>
+										<li>
+											Create an adapter that allows the mini-controller to access methods on
+											the main model.
+										</li>
+										<li>
+											Construct a new mini-controller and give it this adapter. Start the mini-
+											controller. This should start the mini-model and mini-view.
+										</li>
+										<li>
+											The mini-controller, upon construction, should create an adapter that
+											allows the main model to access methods on it. Retrieve this adapter
+											and send it to the main model for later use.
+										</li>
+										<li>
+											Retrieve the mini-view from the mini-controller and send it to the main
+											view for installation.
+										</li>
+									</ul>
+								</li>
+								<li>
+									Connect the buttons in the main MVC such that creating a chatroom tells the
+									main model to construct a new chatroom MVC.
+								</li>
+								<li>
+									Connect the buttons in the mini-MVC such that the 'leave chatroom' button
+									tells the main model to delete that chatroom from both its internal store
+									as well as remove it from the view.
+								</li>
+							</ol>
+							<hr />
+							<b>Here's an example of what my sample GUI looks like after the main ChatApp
+								has been started and a few chatrooms created: </b>
+							<br />
+							<br />
+							<img src="images/finalview.png" / style="height: 100%; width: 100%">
+						</section>
+
+						<section id="next-steps" class="main">
+							<header class="major">
+								<h2>Next Steps</h2>
+								<h3>Start using your API!</h3>
+							</header>
+							<ol>
+								<li>
+									At a minimum, instantiate your connection-level remote objects
+									in your main MVC.
+								</li>
+								<li>
+									Stub them, bind them to your registry, and establish an initial
+									connection between two ChatApp instances from people in the same
+									group.
+								</li>
+								<li>
+									Include some way to communicate - even printing out to the other
+									person's console will indicate at least rudimentary connection
+									capabilities and reassure you that everything is working properly.
+								</li>
+							</ol>
+						</section>
+
+						<section id="faq" class="main">
+							<header class="major">
+								<h2>FAQ</h2>
+								<h3>Questions I've been getting a lot</h3>
+							</header>
+							<hr />
+							<section>
+								<header>
+									<h3>What exactly is API-dependent?</h3>
+								</header>
+								<p align="justify">
+									The simple answer is: <i>anything that deals with network communication</i>.
+									In practice, it's a little more complex than that - the API does have to
+									define exactly what's sent across the network and how it's sent, but it
+									also needs to define expected behaviors and processes. <br />
+									For example, the API could specify that no user can disconnect from the
+									network without notifying everyone else of their departure.
+								</p>
+							</section>
+							<hr />
+							<section>
+								<header>
+									<h3>What's a well-known message type?</h3>
+								</header>
+								<p align="justify">
+									A well-known message is simply one that, right out of the box, <i>
+									everyone</i> using your API will have to implement. For example, if an
+									<i>IStringMessage</i> is defined as a well-known type, that means that
+									everyone has to implement their own command to support it. Nobody on the
+									network should ever have to request/send the command that processes it. <br />
+									Looking at it from a more internal perspective, commands for unknown message
+									types (and by extension, the messages themselves) have limited access to
+									the local system, which is defined by the command-to-model adapter. Well-known
+									commands have no such limitation.
+								</p>
+							</section>
+							<hr />
+							<section>
+								<header>
+									<h3>What's the deal with commands, datapackets, and the extended visitor?</h3>
+								</header>
+								<p align="justify">
+									In terms of the Visitor Design Pattern, a datapacket is a <i>host</i> and
+									the extended visitor is, well, the <i>visitor</i>. Fundamentally, this means
+									that when you receive a datapacket, all you need to do to process it is
+									call: <br />
+									<i>datapacket.execute(visitor)</i><br />
+									Delving a little more into specifics, the visitor is like a container for
+									<i>commands</i>. Each command 'installed' in the visitor handles a specific
+									<i>case</i>, or type, of input. In this case, each command will handle a
+									different message type from the datapacket. <br />
+									And a <i>command</i> is just an algorithm that processes a message in
+									some way. So when someone sends you a command, all you need to do is
+									give it your local command-to-model adapter and install it into your
+									visitor. From that point, you'll be able to handle messages of the
+									type handled by that command. This forms the basis of unknown
+									message processing.
+								</p>
+							</section>
+							<hr />
+							<section>
+								<header>
+									<h3>Remote vs Serializable Objects</h3>
+								</header>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th width="33%">Remote Objects</th>
+												<th width="34%">Stubs</th>
+												<th width="33%">Serializable Objects</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><b>Cannot</b> be sent across the network</td>
+												<td><b>Can</b> be sent across the network</td>
+												<td><b>Can</b> be sent across the network</td>
+											</tr>
+											<tr>
+												<td>Exist as a <b>standalone</b> object</td>
+												<td><b>Created from</b> and <b>dependent on</b> remote objects</td>
+												<td>Exist as a <b>standalone</b> object</td>
+											</tr>
+											<tr>
+												<td><b>Can</b> do their own processing</td>
+												<td><b>Cannot</b> do their own processing - call back to the
+												original remote object to do processing for them</td>
+												<td><b>Can</b> do their own processing</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+							<hr />
+							<section>
+								<header>
+									<h3>Synchronous vs Asynchronous Message-Sending</h3>
+								</header>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th width="50%">Synchronous</th>
+												<th width="50%">Asynchronous</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Sender <b>waits</b> for a response from the receiver</td>
+												<td>Sender <b>does not wait</b> for a response from the receiver</td>
+											</tr>
+											<tr>
+												<td>Generally <b>non-void</b> return types</td>
+												<td>Generally <b>void</b> return type</td>
+											</tr>
+											<tr>
+												<td>Sending and receiving requests/commands <b>usually not</b> done on different threads</td>
+												<td>Sending and receiving requests/commands <b>must</b> be done on different threads</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+							<hr />
+						</section>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section style="width: 100%">
+							<center>
+								<div>
+									<ul class="icons">
+										<li><a href="https://github.com/rharpavat" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
+									</ul>
+								</div>
+							</center>
+							<p class="copyright">&copy; Rishu Harpavat. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</section>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
