@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<!--
+	Overflow by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>How To ChatApp?</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<h1>ChatApp</h1>
+					<p>A Guide to Survival</p>
+				</header>
+				<footer>
+					<a href="#banner" class="button style2 scrolly-middle">Get Started</a>
+				</footer>
+			</section>
+
+		<!-- Banner -->
+			<section id="banner">
+				<header>
+					<h2>The Single Most Important Thing You Can Do</h2>
+				</header>
+				<p>
+					is to begin your implementation immediately. <br/>
+					<i>
+						The earlier you begin your implementation, the greater chances you have of
+						actually finishing the project.
+					</i>
+				</p>
+				<footer>
+					<a href="#project-setup" class="button style2 scrolly">How do I begin?</a>
+					<a href="#faq" class="button style2 scrolly">FAQ</a>
+				</footer>
+			</section>
+
+			<article id="project-setup" class="container box style3">
+				<header>
+					<h2>Begin With The Basics</h2>
+				</header>
+				<section>
+					<header>
+						<h3>Set up your project + package hierarchy</h3>
+					</header>
+					<ol>
+						<li>
+							Create a new Java Project named HW08 & connect it to your team lead's SVN repository.
+						</li>
+						<li>
+							Set the <i>svn:externals</i> property of the project's <b>src</b> folder to the value: <br/>
+								<b>provided https://svn.rice.edu/r/comp310-svn/course/ChatApp/provided_F18</b>
+						</li>
+						<li>
+							Commit the changes to SVN. Update the repository to HEAD. You should now have the
+							<b>provided</b> package in your project, under the <b>src</b> package.
+						</li>
+						<li>
+							Create a new package under <b>src</b>, named <b>netid1_netid2</b>, where netid1 is
+							the netID of the team lead. <b>ALL YOUR CHATAPP IMPLEMENTATION CODE WILL GO
+							IN HERE</b>.
+						</li>
+					</ol>
+				</section>
+			</article>
+
+			<article id="main-mvc" class="container box style3">
+				<header>
+					<h2>Set up the main MVC</h2>
+				</header>
+				<section>
+					<ol>
+						<li>
+							Create packages for the main model, view, and controller. Create the actual
+							Controller and Model classes. Create a model-to-view
+							adapter in the model package, and a view-to-model adapter in the view package.
+						</li>
+						<li>
+							Create the JFrame View class. Your ChatApp view should have at components for
+							at least the following capabilities:
+							<br/>
+							<br/>
+							<ul>
+								<li>
+									Entering a user's IP address and connecting to them.
+								</li>
+								<li>
+									Creating a new chatroom (optionally taking in a name for it).
+								</li>
+								<li>
+									Seeing the users you're connected to.
+								</li>
+								<li>
+									Seeing a list of the chatrooms you're connected to.
+								</li>
+								<li>
+									<i>If you're supporting invites to chatrooms</i>, a way to invite a selected
+									user to a chatroom.
+								</li>
+								<li>
+									<i>If you're supporting request-to-join for chatrooms</i>, a way to see
+									what chatrooms are available on the network, and to join one.
+								</li>
+								<li>
+									<i>If you're supporting request-to-join for chatrooms</i>, a way to search
+									for all chatrooms you can see on the network.
+								</li>
+								<li>
+									A panel (I'd recommend a tabbed pane) into which chatrooms can be installed
+									as needed.
+								</li>
+								<li>
+									A button to quit the application. <b>ALWAYS USE THIS WHEN EXITING YOUR CHATAPP.</b>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Create any methods you need in your adapters (at a minimum, the ability to send the
+							<b>quit</b> instruction to the model) and connect them through the Controller.
+						</li>
+						<li>
+							Test any methods you've created so far and ensure they work.
+						</li>
+					</ol>
+				</section>
+			</article>
+
+			<article id="mini-mvc" class="container box style3">
+				<header>
+					<h2>Set up the mini-MVC</h2>
+				</header>
+				<section>
+					<ol>
+						<li>
+							Create a separate package somewhere in your project under the <b>src</b> package
+							that will contain the components for a chatroom mini-MVC. Create controller,
+							model, and view sub-packages. Create the Controller and Model classes as well
+							as the view-to-model and model-to-view adapters.
+						</li>
+						<li>
+							Create the View class. I would recommend creating this as a <i>JPanel</i> instead
+							of a <i>JFrame</i>, since it will never exist on its own, only installed into
+							the main MVC's view.
+						</li>
+						<li>
+							Create the JFrame View class. Your ChatApp view should have at components for
+							at least the following capabilities:
+							<br/>
+							<br/>
+							<ul>
+								<li>
+									Entering a user's IP address and connecting to them.
+								</li>
+								<li>
+									Creating a new chatroom (optionally taking in a name for it).
+								</li>
+								<li>
+									Seeing the users you're connected to.
+								</li>
+								<li>
+									Seeing a list of the chatrooms you're connected to.
+								</li>
+								<li>
+									<i>If you're supporting invites to chatrooms</i>, a way to invite a selected
+									user to a chatroom.
+								</li>
+								<li>
+									<i>If you're supporting request-to-join for chatrooms</i>, a way to see
+									what chatrooms are available on the network, and to join one.
+								</li>
+								<li>
+									<i>If you're supporting request-to-join for chatrooms</i>, a way to search
+									for all chatrooms you can see on the network.
+								</li>
+								<li>
+									A button to quit the application. <b>ALWAYS USE THIS WHEN EXITING YOUR CHATAPP.</b>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Create any methods you need in your adapters (at a minimum, the ability to send the
+							<b>quit</b> instruction to the model) and connect them through the Controller.
+						</li>
+						<li>
+							Test any methods you've created so far and ensure they work.
+						</li>
+					</ol>
+				</section>
+			</article>
+
+		<!-- Generic -->
+			<article class="container box style3">
+				<header>
+					<h2>Generic Box</h2>
+					<p>Just a generic box. Nothing to see here.</p>
+				</header>
+				<section>
+					<header>
+						<h3>Paragraph</h3>
+						<p>This is a subtitle</p>
+					</header>
+					<p>Phasellus nisl nisl, varius id <sup>porttitor sed pellentesque</sup> ac orci. Pellentesque
+					habitant <strong>strong</strong> tristique <b>bold</b> et netus <i>italic</i> malesuada <em>emphasized</em> ac turpis egestas. Morbi
+					leo suscipit ut. Praesent <sub>id turpis vitae</sub> turpis pretium ultricies. Vestibulum sit
+					amet risus elit.</p>
+				</section>
+				<section>
+					<header>
+						<h3>Blockquote</h3>
+					</header>
+					<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget.
+					tempus euismod. Vestibulum ante ipsum primis in faucibus.</blockquote>
+				</section>
+				<section>
+					<header>
+						<h3>Divider</h3>
+					</header>
+					<p>Donec consectetur <a href="#">vestibulum dolor et pulvinar</a>. Etiam vel felis enim, at viverra
+					ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+					facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+					tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+					posuere cubilia.</p>
+					<hr />
+					<p>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra
+					ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+					facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+					tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+					posuere cubilia.</p>
+				</section>
+				<section>
+					<header>
+						<h3>Unordered List</h3>
+					</header>
+					<ul>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+					</ul>
+				</section>
+				<section>
+					<header>
+						<h3>Ordered List</h3>
+					</header>
+					<ol>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+					</ol>
+				</section>
+				<section>
+					<header>
+						<h3>Table</h3>
+					</header>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>45815</td>
+									<td>Something</td>
+									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+									<td>29.99</td>
+								</tr>
+								<tr>
+									<td>24524</td>
+									<td>Nothing</td>
+									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+									<td>19.99</td>
+								</tr>
+								<tr>
+									<td>45815</td>
+									<td>Something</td>
+									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+									<td>29.99</td>
+								</tr>
+								<tr>
+									<td>24524</td>
+									<td>Nothing</td>
+									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+									<td>19.99</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="3"></td>
+									<td>100.00</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</section>
+			</article>
+
+		<section id="footer">
+			<ul class="icons">
+				<li><a href="https://github.com/rharpavat" class="icon fa-github"><span class="label">GitHub</span></a></li>
+			</ul>
+			<div class="copyright">
+				<ul class="menu">
+					<li>&copy; Rishu Harpavat. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
