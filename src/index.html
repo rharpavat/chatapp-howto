@@ -130,6 +130,11 @@
 							Test any methods you've created so far and ensure they work.
 						</li>
 					</ol>
+					<hr />
+					<b>Here's an example of what my sample GUI looks like: </b>
+					<br />
+					<br />
+					<img src="images/mainview.png" / style="height: 100%; width: 100%">
 				</section>
 			</article>
 
@@ -143,169 +148,236 @@
 							Create a separate package somewhere in your project under the <b>src</b> package
 							that will contain the components for a chatroom mini-MVC. Create controller,
 							model, and view sub-packages. Create the Controller and Model classes as well
-							as the view-to-model and model-to-view adapters.
+							as the view-to-model and model-to-view adapters. <br/>
+							<i>Note that the mini-controller should not have a main method! It should
+							only be able to be instantiated by the main MVC.</i>
 						</li>
 						<li>
 							Create the View class. I would recommend creating this as a <i>JPanel</i> instead
-							of a <i>JFrame</i>, since it will never exist on its own, only installed into
-							the main MVC's view.
-						</li>
-						<li>
-							Create the JFrame View class. Your ChatApp view should have at components for
-							at least the following capabilities:
-							<br/>
-							<br/>
+							of a <i>JFrame</i>, since it will never exist on its own, only be installed into
+							the main MVC's view. Your chatroom view might have components for the following
+							capabilities:
+							<br />
+							<br />
 							<ul>
 								<li>
-									Entering a user's IP address and connecting to them.
+									Leaving a chatroom.
 								</li>
 								<li>
-									Creating a new chatroom (optionally taking in a name for it).
+									Sending a text message.
 								</li>
 								<li>
-									Seeing the users you're connected to.
+									Displaying all the text messages that have been sent in the room so far.
 								</li>
 								<li>
-									Seeing a list of the chatrooms you're connected to.
-								</li>
-								<li>
-									<i>If you're supporting invites to chatrooms</i>, a way to invite a selected
-									user to a chatroom.
-								</li>
-								<li>
-									<i>If you're supporting request-to-join for chatrooms</i>, a way to see
-									what chatrooms are available on the network, and to join one.
-								</li>
-								<li>
-									<i>If you're supporting request-to-join for chatrooms</i>, a way to search
-									for all chatrooms you can see on the network.
-								</li>
-								<li>
-									A button to quit the application. <b>ALWAYS USE THIS WHEN EXITING YOUR CHATAPP.</b>
+									You may also want to add a console panel, or a button that sends an
+									unknown-type message.
 								</li>
 							</ul>
 						</li>
 						<li>
 							Create any methods you need in your adapters (at a minimum, the ability to send the
-							<b>quit</b> instruction to the model) and connect them through the Controller.
+							<b>leave chatroom</b> instruction to the mini-model) and connect them through the
+							mini-controller.
+						</li>
+					</ol>
+					<hr />
+					<b>Here's an example of what my sample GUI looks like: </b>
+					<br />
+					<br />
+					<img src="images/miniview.png" / style="height: 100%; width: 100%">
+				</section>
+			</article>
+
+			<article id="connecting-mvcs" class="container box style3">
+				<header>
+					<h2>Connecting the Main and mini-MVC</h2>
+				</header>
+				<section>
+					<ol type="1">
+						<li>
+							Create adapters for the main model to the mini-controller and the
+							mini-controller to the main model.
 						</li>
 						<li>
-							Test any methods you've created so far and ensure they work.
+							Create a method in the main-model-to-view adapter to create a new chatroom.
+						</li>
+						<li>
+							In the main controller, intercept this method call - instead of sending it
+							to the view, do the following:
+							<br />
+							<br />
+							<ul>
+								<li>
+									Create an adapter that allows the mini-controller to access methods on
+									the main model.
+								</li>
+								<li>
+									Construct a new mini-controller and give it this adapter. Start the mini-
+									controller. This should start the mini-model and mini-view.
+								</li>
+								<li>
+									The mini-controller, upon construction, should create an adapter that
+									allows the main model to access methods on it. Retrieve this adapter
+									and send it to the main model for later use.
+								</li>
+								<li>
+									Retrieve the mini-view from the mini-controller and send it to the main
+									view for installation.
+								</li>
+							</ul>
+						</li>
+						<li>
+							Connect the buttons in the main MVC such that creating a chatroom tells the
+							main model to construct a new chatroom MVC.
+						</li>
+						<li>
+							Connect the buttons in the mini-MVC such that the 'leave chatroom' button
+							tells the main model to delete that chatroom from both its internal store
+							as well as remove it from the view.
+						</li>
+					</ol>
+					<hr />
+					<b>Here's an example of what my final, connected GUI looks like: </b>
+					<br />
+					<br />
+					<img src="images/finalview.png" / style="height: 100%; width: 100%">
+				</section>
+			</article>
+
+			<article id="next-steps" class="container box style3">
+				<header>
+					<h2>Next Steps</h2>
+					<p>
+						Start using your API!
+					</p>
+				</header>
+				<section>
+					<ol>
+						<li>
+							At a minimum, instantiate your connection-level remote objects
+							in your main MVC.
+						</li>
+						<li>
+							Stub them, bind them to your registry, and establish an initial
+							connection between two ChatApp instances from people in the same
+							group.
+						</li>
+						<li>
+							Include some way to communicate - even printing out to the other
+							person's console will indicate at least rudimentary connection
+							capabilities and reassure you that everything is working properly.
 						</li>
 					</ol>
 				</section>
 			</article>
 
-		<!-- Generic -->
-			<article class="container box style3">
+			<article id="faq" class="container box style3">
 				<header>
-					<h2>Generic Box</h2>
-					<p>Just a generic box. Nothing to see here.</p>
+					<h2>
+						FAQ
+					</h2>
+					<p>
+						Questions I've been getting from everyone
+					</p>
 				</header>
+				<hr />
 				<section>
 					<header>
-						<h3>Paragraph</h3>
-						<p>This is a subtitle</p>
+						<h3>What exactly is API-dependent?</h3>
 					</header>
-					<p>Phasellus nisl nisl, varius id <sup>porttitor sed pellentesque</sup> ac orci. Pellentesque
-					habitant <strong>strong</strong> tristique <b>bold</b> et netus <i>italic</i> malesuada <em>emphasized</em> ac turpis egestas. Morbi
-					leo suscipit ut. Praesent <sub>id turpis vitae</sub> turpis pretium ultricies. Vestibulum sit
-					amet risus elit.</p>
+					<p align="justify">
+						The simple answer is: <i>anything that deals with network communication</i>.
+						In practice, it's a little more complex than that - the API does have to
+						define exactly what's sent across the network and how it's sent, but it
+						also needs to define expected behaviors and processes. <br />
+						For example, the API could specify that no user can disconnect from the
+						network without notifying everyone else of their departure.
+					</p>
 				</section>
+				<hr />
 				<section>
 					<header>
-						<h3>Blockquote</h3>
+						<h3>What's a well-known message type?</h3>
 					</header>
-					<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget.
-					tempus euismod. Vestibulum ante ipsum primis in faucibus.</blockquote>
+					<p align="justify">
+						A well-known message is simply one that, right out of the box, <i>
+						everyone</i> using your API will have to implement. For example, if an
+						<i>IStringMessage</i> is defined as a well-known type, that means that
+						everyone has to implement their own command to support it. Nobody on the
+						network should ever have to request/send the command that processes it. <br />
+						Looking at it from a more internal perspective, commands for unknown message
+						types (and by extension, the messages themselves) have limited access to
+						the local system, which is defined by the command-to-model adapter. Well-known
+						commands have no such limitation.
+					</p>
 				</section>
+				<hr />
 				<section>
 					<header>
-						<h3>Divider</h3>
-					</header>
-					<p>Donec consectetur <a href="#">vestibulum dolor et pulvinar</a>. Etiam vel felis enim, at viverra
-					ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
-					facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
-					tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-					posuere cubilia.</p>
-					<hr />
-					<p>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra
-					ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
-					facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
-					tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-					posuere cubilia.</p>
-				</section>
-				<section>
-					<header>
-						<h3>Unordered List</h3>
-					</header>
-					<ul>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-					</ul>
-				</section>
-				<section>
-					<header>
-						<h3>Ordered List</h3>
-					</header>
-					<ol>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-						<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
-					</ol>
-				</section>
-				<section>
-					<header>
-						<h3>Table</h3>
+						<h3>Remote vs Serializable Objects</h3>
 					</header>
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Description</th>
-									<th>Price</th>
+									<th width="33%">Remote Objects</th>
+									<th width="34%">Stubs</th>
+									<th width="33%">Serializable Objects</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>45815</td>
-									<td>Something</td>
-									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
-									<td>29.99</td>
+									<td><b>Cannot</b> be sent across the network</td>
+									<td><b>Can</b> be sent across the network</td>
+									<td><b>Can</b> be sent across the network</td>
 								</tr>
 								<tr>
-									<td>24524</td>
-									<td>Nothing</td>
-									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
-									<td>19.99</td>
+									<td>Exist as a <b>standalone</b> object</td>
+									<td><b>Created from</b> and <b>dependent on</b> remote objects</td>
+									<td>Exist as a <b>standalone</b> object</td>
 								</tr>
 								<tr>
-									<td>45815</td>
-									<td>Something</td>
-									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
-									<td>29.99</td>
-								</tr>
-								<tr>
-									<td>24524</td>
-									<td>Nothing</td>
-									<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
-									<td>19.99</td>
+									<td><b>Can</b> do their own processing</td>
+									<td><b>Cannot</b> do their own processing - call back to the
+									original remote object to do processing for them</td>
+									<td><b>Can</b> do their own processing</td>
 								</tr>
 							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="3"></td>
-									<td>100.00</td>
-								</tr>
-							</tfoot>
 						</table>
 					</div>
 				</section>
+				<hr />
+				<section>
+					<header>
+						<h3>Synchronous vs Asynchronous Message-Sending</h3>
+					</header>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th width="50%">Synchronous</th>
+									<th width="50%">Asynchronous</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Sender <b>waits</b> for a response from the receiver</td>
+									<td>Sender <b>does not wait</b> for a response from the receiver</td>
+								</tr>
+								<tr>
+									<td>Generally <b>non-void</b> return types</td>
+									<td>Generally <b>void</b> return type</td>
+								</tr>
+								<tr>
+									<td>Sending and receiving requests/commands<b>usually not</b> done on different threads</td>
+									<td>Sending and receiving requests/commands<b>must</b>be done on different threads</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+				<hr />
 			</article>
 
 		<section id="footer">
