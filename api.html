@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>How to ChatApp?</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<h1>ChatApp</h1>
+						<h3>
+							A Guide To Survival: Using the API
+						</h3>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#rmi-setup" class="active">Setting up RMI</a></li>
+							<li><a href="#remote-connection">System-level Connections</a></li>
+							<li><a href="#chatroom-update">Creating Chatrooms</a></li>
+							<li><a href="#messaging">Message-Sending</a></li>
+							<li><a href="#chatroom-join-leave">Joining/Leaving Chatrooms</a></li>
+							<li><a href="#unknown-messages">Handling Unknown Messages</a></li>
+							<li><a href="#factories">Displaying Things on the View</a></li>
+							<li><a href="#faq">FAQ</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Setting up your RMI server</h2>
+										</header>
+										<p>
+											<ol>
+												<li>
+													Inside your main model, create a new <b>RMIUtils</b> object.
+												</li>
+												<li>
+													Inside the model's <i>start()</i> method, start this object using one of the <i>CLASS_SERVER_PORT</i>s from <b>IRMI_Defs</b>.
+												</li>
+												<li>
+													<b>Make sure that any stubs you export are exported using the <i>STUB_PORT</i> corresponding to the <i>CLASS_SERVER_PORT</i> you used to start the RMI utilities.</b>
+												</li>
+												<li>
+													<b>Make sure that any stubs you export are exported using the <i>STUB_PORT</i> corresponding to the <i>CLASS_SERVER_PORT</i> you used to start the RMI utilities.</b>
+												</li>
+												<li>
+													Inside the model's <i>stop()</i> method, make sure to unbind everything from the registry and stop the RMI utility.
+												</li>
+											</ol>
+										</p>
+									</div>
+								</div>
+							</section>
+
+						<!-- First Section -->
+						<section id="remote-connection" class="main">
+							<header class="major">
+								<h2>Begin With The Basics</h2>
+								<h3>Set up system-level communication - the <b>IRemoteConnection</b></h3>
+							</header>
+							<ol>
+								<li>
+									Instantiate a new <b>IRemoteConnection</b> object as an anonymous inner class inside your model's <i>start()</i> method. Save a reference to this object somewhere in your model.
+								</li>
+								<li>
+									Export this <b>IRemoteConnection</b> object to a stub and save a reference to the stub somewhere in your model.
+								</li>
+								<li>
+									Get your local registry from the <b>RMIUtils</b> object and rebind the <b>IRemoteConnection</b> stub to it.
+								</li>
+							</ol>
+						</section>
+
+						<section id="chatroom-update" class="main">
+							<header class="major">
+								<h2>Update your chatrooms</h2>
+							</header>
+							<ol>
+								<li>
+									Modify the mini-controller's constructor to optionally take an <b>IChatRoom</b> object. If this <b>IChatRoom</b> object is present, instantiate the mini-model with its information (eg. name, UUID, and list of members). Otherwise, create a new concrete version of an <b>IChatRoom</b> object and save a reference to it in the model (more on this in the next section).
+								</li>
+								<li>
+									Inside the mini-model's <i>start()</i> method, instantiate a new <b>IMember</b> object as an anonymous inner class and save a reference to it in the mini-model.
+								</li>
+								<li>
+									Stub this <b>IMember</b> object and save a reference to that in your mini-model as well.
+								</li>
+								<li>
+									Create a new <b>ICmd2ModelAdapter</b> object as an anonymous inner class and save a reference to it in the mini-model.
+								</li>
+								<li>
+									There's more to be done here, but we'll get to that later...
+								</li>
+							</ol>
+						</section>
+
+						<section id="messaging" class="main">
+							<header class="major">
+								<h2>Message-Sending</h2>
+							</header>
+							<ol>
+								<li>
+									Create some package under your <b>src</b> package that will contain implemented concrete versions of all serializable objects defined in the API. This includes <b>IChatRoom</b> and all the well-known message types under the <b>message</b> package. Then create concrete classes that implement each of these things.
+								</li>
+								<li>
+									Create a visitor (<b>ChatroomDataPacketAlgo</b>) inside your mini-model. Set the default command to simply print that an unknown message has been received for now - we will get to this later.
+								</li>
+								<li>
+									For every well-known message type in the API, create a new <b>AMessageCmd</b> as an anonymous inner class and install it into your visitor (this should be done on startup of the model!).
+								</li>
+								<li>
+									When the <b>IMember</b> object receives a datapacket, all it needs to do is call <i>datapacket.execute(visitor)</i>.
+								</li>
+							</ol>
+						</section>
+
+						<section id="chatroom-join-leave" class="main">
+							<header class="major">
+								<h2>Joining and leaving chatrooms</h2>
+							</header>
+							<ol>
+								<li>
+									Going back to when we start the main model - after the <b>IMember</b> stub has been exported, construct a <b>ChatroomDataPacket</b> containing an <b>IJoinData</b> with this stub as the sender. <b>Make sure you're creating a concrete instance of the IJoinData object and not an anonymous inner class!</b>
+								</li>
+								<li>
+									Send this datapacket to your local <b>IChatRoom</b> object.
+								</li>
+								<li>
+									Add your own <b>IMember</b> stub to your local <b>IChatRoom</b> object.
+								</li>
+								<li>
+									Leaving a chatroom is very similar - remove your <b>IMember</b> stub from the chatroom, construct a <b>ChatroomDataPacket</b> containing an <b>ILeaveData</b>, and send it to the chatroom.
+								</li>
+							</ol>
+						</section>
+
+						<section id="unknown-messages" class="main">
+							<header class="major">
+								<h2>Handling Unknown Messages</h2>
+							</header>
+							<ol>
+								<li>
+									Create a cache somewhere in your model to store unprocessed datapackets. My cache is structured as a <b>ConcurrentHashMap</b> (used for thread safety!) mapping <b>IDataPacketID</b> to lists of <b>ChatroomDataPacket</b>s. 
+								</li>
+								<li>
+									Going back to your visitor's default command, modify it to save the received unknown message in this cache (creating a new entry if it doesn't exist, adding to the list if it does). Construct an <b>IRequestCmdData</b> message containing the <b>IDataPacketID</b> of the received unknown datapacket, wrap it in a <b>ChatroomDataPacket</b>, and send it to the sender of the unknown datapacket.
+								</li>
+								<li>
+									On receiving an <b>IRequestCmdData</b> message, get the command corresponding to the ID contained in the message (you can get it directly from your visitor or some other hashmap you maintain). Wrap this command and the ID in an <b>IInstallCmdData</b> message, put it in a <b>ChatroomDataPacket</b>, and send it back to the sender.
+								</li>
+								<li>
+									On receiving an <b>IInstallCmdData</b> message, get the command and ID contained in the message. Set the command-to-model adapter of the command to be the one you creater earlier, and install the command into the visitor with the given ID. <br/>
+									Then, get the list of datapackets mapped to the given ID from your cache. Iterate through and re-execute them using your visitor. Once you're done, just remove that ID entirely from the cache.
+								</li>
+							</ol>
+						</section>
+
+						<section id="factories" class="main">
+							<header class="major">
+								<h2>Displaying things on the view</h2>
+								<h3>Specifically, <b>IRemoteConnection</b> and <b>IChatRoom</b> objects</h3>
+							</header>
+							<ol>
+								<li>
+									Create a concrete factory that contains an instance of an <b>IRemoteConnection</b> or <b>IChatRoom</b> as well as a string name. 
+								</li>
+								<li>
+									Add a <i>make()</i> method that returns the contained object.
+								</li>
+								<li>
+									Override the <i>toString()</i> method to return the saved name (this name is just the name of the object gotten from <i>getName()</i>).
+								</li>
+								<li>
+									Now you can put these factories in your view's combo boxes instead of the actual objects themselves.
+								</li>
+							</ol>
+						</section>
+
+						<section id="faq" class="main">
+							<header class="major">
+								<h2>FAQ</h2>
+								<h3>Questions I've been getting a lot</h3>
+							</header>
+							<hr />
+							<section>
+								<header>
+									<h3>Why am I getting a <b>NotSerializableException</b>?</h3>
+								</header>
+								<p align="justify">
+									There are three main reasons this could be happening:
+									<ul>
+										<li>
+											You're trying to send a <b>Remote</b> object instead of its stub.
+										</li>
+										<li>
+											You're trying to send an anonymous inner class.
+										</li>
+										<li>
+											You're trying to send an object that isn't serializable in the first place.
+										</li>
+									</ul>
+								</p>
+							</section>
+							<hr/>
+						</section>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section style="width: 100%">
+							<center>
+								<div>
+									<ul class="icons">
+										<li><a href="https://github.com/rharpavat" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
+									</ul>
+								</div>
+							</center>
+							<p class="copyright">&copy; Rishu Harpavat. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</section>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
